@@ -23,6 +23,11 @@ public class AgendamentoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(agendaDTO));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AgendamentoDTO> cancelarAgendamento(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.cancelar(id));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<AgendamentoDTO> buscarAgendamentoPorId(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(service.buscar(id));
