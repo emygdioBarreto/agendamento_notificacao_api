@@ -2,6 +2,7 @@ package com.emygdio.agendamento_notificacao_api.services;
 
 import com.emygdio.agendamento_notificacao_api.domain.dto.AgendamentoDTO;
 import com.emygdio.agendamento_notificacao_api.domain.mapper.AgendamentoMapper;
+import com.emygdio.agendamento_notificacao_api.exceptions.NotFoundException;
 import com.emygdio.agendamento_notificacao_api.repositories.AgendamentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,10 @@ public class AgendamentoService {
 
     public AgendamentoDTO salvar(AgendamentoDTO agendaDTO) {
         return mapper.toDTO(repository.save(mapper.toEntity(agendaDTO)));
+    }
+
+    public AgendamentoDTO buscar(Long id) {
+        return mapper.toDTO(repository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Agendamento não encontrado")));
     }
 }
