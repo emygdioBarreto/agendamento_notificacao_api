@@ -16,10 +16,10 @@ public class Agendamento {
 
     private String emailDestinatario;
     private String telefoneDestrinario;
+    private String mensagem;
     private LocalDateTime dataHoraEnvio;
     private LocalDateTime dataHoraAgendamento;
     private LocalDateTime dataHoraModificacao;
-    private String mensagem;
     private StatusNotificacaoEnum statusNotificacao;
 
     @PrePersist
@@ -28,14 +28,22 @@ public class Agendamento {
         statusNotificacao = StatusNotificacaoEnum.AGENDADO;
     }
 
-    public Agendamento(Long id, String emailDestinatario, String telefoneDestrinario, LocalDateTime dataHoraEnvio, LocalDateTime dataHoraAgendamento, LocalDateTime dataHoraModificacao, String mensagem, StatusNotificacaoEnum statusNotificacao) {
+    public Agendamento(
+                Long id,
+                String emailDestinatario,
+                String telefoneDestrinario,
+                String mensagem,
+                LocalDateTime dataHoraEnvio,
+                LocalDateTime dataHoraAgendamento,
+                LocalDateTime dataHoraModificacao,
+                StatusNotificacaoEnum statusNotificacao) {
         this.id = id;
         this.emailDestinatario = emailDestinatario;
         this.telefoneDestrinario = telefoneDestrinario;
+        this.mensagem = mensagem;
         this.dataHoraEnvio = dataHoraEnvio;
         this.dataHoraAgendamento = dataHoraAgendamento;
         this.dataHoraModificacao = dataHoraModificacao;
-        this.mensagem = mensagem;
         this.statusNotificacao = statusNotificacao;
     }
 
@@ -66,6 +74,14 @@ public class Agendamento {
         this.telefoneDestrinario = telefoneDestrinario;
     }
 
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
     public LocalDateTime getDataHoraEnvio() {
         return dataHoraEnvio;
     }
@@ -88,14 +104,6 @@ public class Agendamento {
 
     public void setDataHoraModificacao(LocalDateTime dataHoraModificacao) {
         this.dataHoraModificacao = dataHoraModificacao;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
     }
 
     public StatusNotificacaoEnum getStatusNotificacao() {

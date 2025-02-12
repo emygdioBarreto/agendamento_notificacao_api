@@ -1,6 +1,5 @@
 package com.emygdio.agendamento_notificacao_api.controller;
 
-import com.emygdio.agendamento_notificacao_api.domain.dto.AgendamentoDTO;
 import com.emygdio.agendamento_notificacao_api.domain.dto.in.AgendamentoDtoIn;
 import com.emygdio.agendamento_notificacao_api.domain.dto.in.AgendamentoDtoOut;
 import com.emygdio.agendamento_notificacao_api.services.AgendamentoService;
@@ -19,17 +18,18 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<AgendamentoDTO> gravarAgendamento(@RequestBody AgendamentoDTO agendaDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(agendaDTO));
+    public ResponseEntity<AgendamentoDtoOut> gravarAgendamento(@RequestBody AgendamentoDtoIn agendaIn) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(agendaIn));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AgendamentoDTO> cancelarAgendamento(@PathVariable("id") Long id) {
+    public ResponseEntity<AgendamentoDtoOut> cancelarAgendamento(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.cancelar(id));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AgendamentoDTO> buscarAgendamentoPorId(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(service.buscar(id));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void buscarAgendamentoPorId(@PathVariable("id") Long id) {
+        service.buscar(id);
     }
 }
